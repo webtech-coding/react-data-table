@@ -1,0 +1,13 @@
+.data-table{
+    width: 100%;
+    background-color: green;
+
+    &__table{
+        width: 100%;
+    }
+
+    &__header{
+        width: 100%;
+        background-color: red;
+    }   
+}
