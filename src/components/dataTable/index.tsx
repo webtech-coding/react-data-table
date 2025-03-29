@@ -1,12 +1,26 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactElement, useState } from "react";
+import PropTypes from "prop-types";
+
 import ActionBar from "./actionBar";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
-import { TableHeaderCell, TableProps } from "./types";
+import { TableColumnDataCell, TableHeaderDataCell, TableProps, sortDirection, visibleRows } from "./types";
 
+const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
+    const { 
+        showActionBar=true,
+        rows,
+        headers,
+        stripe=false
+    } = props;
 
-const ReactDataTable:FC<TableProps> = ({showActionBar=true}):ReactElement=>{
-    const tableHeaderCells = [
+    const [numberOfVisibleRows, setNumberOfVisibleRows] = useState<visibleRows>(10);
+    const [sortBy, setSortby] = useState<string | null>(null);
+    const [sortDir, setSortDir] = useState<sortDirection>(sortDirection.ASC);
+    const [searchText, setSearchText] = useState<string | null>useState();
+    
+
+    const tableHeaderDataCells = [
         {
             label:"Name",
             name:"name",
@@ -17,7 +31,7 @@ const ReactDataTable:FC<TableProps> = ({showActionBar=true}):ReactElement=>{
         },
         {
             label:"Nationality",
-            name:"address",
+            name:"nationality",
         },
         {
             label:"Address",
@@ -26,7 +40,14 @@ const ReactDataTable:FC<TableProps> = ({showActionBar=true}):ReactElement=>{
         }
     ]
 
-    const tableRows = []
+    const tableRows = [
+        {
+            name:"shovit",
+            age:45,
+            address:"Kathmandu",
+            nationality:"Nepali"
+        }
+    ]
 
     return(
         <div className="data-table">
@@ -34,15 +55,25 @@ const ReactDataTable:FC<TableProps> = ({showActionBar=true}):ReactElement=>{
             
             <table className="data-table__table">
                 <TableHeader 
-                    headerCells={tableHeaderCells}
-                    onHeaderClick={(header:TableHeaderCell)=>console.log(header)}
+                    headers={tableHeaderDataCells}
+                    onHeaderClick={(header:TableHeaderDataCell)=>console.log(header)}
                 />
                 <TableBody 
-                    tableRows={tableRows}
+                    rows={tableRows}
+                    headers={tableHeaderDataCells}
+                    stripe={stripe}
+                    onRowClick={(row:TableColumnDataCell, columnCell:string)=>console.log(row, columnCell)}
                 />
             </table>
         </div>
     )
+}
+
+ReactDataTable.prototype = {
+    showActionBar:PropTypes.bool,
+    rows:PropTypes.array.isRequired,
+    headers:PropTypes.array.isRequired,
+    strpe:PropTypes.bool
 }
 
 export default ReactDataTable;

@@ -1,17 +1,17 @@
 import { FC, ReactElement, memo } from "react"
-import { TableHeaderCell } from "./types"
+import { TableHeaderDataCell } from "./types"
 
 type TableHeaderPropType ={
-    headerCells:TableHeaderCell[],
-    onHeaderClick:(e:TableHeaderCell)=>void
+    headers:TableHeaderDataCell[],
+    onHeaderClick:(e:TableHeaderDataCell)=>void
 }
 
-const TableHeader:FC<TableHeaderPropType> =({headerCells, onHeaderClick}):ReactElement=>{
+const TableHeader:FC<TableHeaderPropType> =({headers, onHeaderClick}):ReactElement=>{
     return(
         <thead className="data-table__header">
              <tr>
                 {
-                    headerCells.map(cell=>{
+                    headers.map(cell=>{
                         return(
                             <th onClick={()=>onHeaderClick(cell)}>{cell.label}</th>
                         )

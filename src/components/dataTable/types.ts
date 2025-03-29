@@ -1,4 +1,4 @@
-export type TableHeaderCell={
+export type TableHeaderDataCell={
     label:string,
     name:string,
     sorting?:boolean,
@@ -6,12 +6,19 @@ export type TableHeaderCell={
     hideinMd?:boolean
 }
 
+export type TableColumnDataCell = Record<string, unknown>;
+
 export type TableProps={
     showActionBar?:boolean,
     stripe?:boolean,
-
+    headers:TableHeaderDataCell[],
+    rows:TableColumnDataCell[],
+    onRowClick?:(row:TableColumnDataCell, name:string)=>void
 }
 
-export type TableColumn={
-    
+export enum sortDirection{
+    ASC = 'asc',
+    DESC = 'desc'
 }
+
+export type visibleRows = 10 | 20 | 50
