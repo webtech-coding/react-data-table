@@ -13,7 +13,9 @@ const TableHeader:FC<TableHeaderPropType> =({headers, onHeaderClick}):ReactEleme
                 {
                     headers.map(cell=>{
                         return(
-                            <th onClick={()=>onHeaderClick(cell)}>{cell.label}</th>
+                            <th onClick={()=>onHeaderClick(cell)}>
+                               <span>{cell.label}</span>
+                            </th>
                         )
                     })
                 }

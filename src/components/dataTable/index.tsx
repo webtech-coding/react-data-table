@@ -17,7 +17,7 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
     const [numberOfVisibleRows, setNumberOfVisibleRows] = useState<visibleRows>(10);
     const [sortBy, setSortby] = useState<string | null>(null);
     const [sortDir, setSortDir] = useState<sortDirection>(sortDirection.ASC);
-    const [searchText, setSearchText] = useState<string | null>useState();
+    const [searchText, setSearchText] = useState<string | null>();
     
 
     const tableHeaderDataCells = [
@@ -46,6 +46,18 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
             age:45,
             address:"Kathmandu",
             nationality:"Nepali"
+        },
+        {
+            name:"siya",
+            age:5,
+            address:"Finland",
+            nationality:"Nepali"
+        },
+        {
+            name:"Shova",
+            age:25,
+            address:"Satungal",
+            nationality:"Nepali"
         }
     ]
 
@@ -62,7 +74,7 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
                     rows={tableRows}
                     headers={tableHeaderDataCells}
                     stripe={stripe}
-                    onRowClick={(row:TableColumnDataCell, columnCell:string)=>console.log(row, columnCell)}
+                    onRowClick={(row:TableColumnDataCell, columnCell:string)=>{console.log(row, columnCell)}}
                 />
             </table>
         </div>

@@ -1,13 +1,28 @@
 .data-table{
     width: 100%;
-    background-color: green;
+    border-radius: 5px 5px;
 
     &__table{
         width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        box-shadow: 0 0 10px rgba($color: #767676, $alpha: .3);
     }
 
     &__header{
         width: 100%;
-        background-color: red;
+
+        tr{
+            background-color: #f1f1f1;
+            text-align: left;
+           
+            th{
+                padding: 10px;
+                color: #515151;
+                border-right: 1px solid #808080;
+               
+ 
+            }
+        }
     }   
 }

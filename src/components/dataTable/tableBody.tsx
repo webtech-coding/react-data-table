@@ -9,16 +9,36 @@ type TableColumnDataCellProps = {
 }
 
 const TableBody:FC<TableColumnDataCellProps> =({rows, headers, stripe, onRowClick}):ReactElement=>{
+    const getAllRows = ()=>{
+        const allRows:TableColumnDataCell[] = []
+
+        rows.forEach(row=>{
+            const rowData= {}
+
+            headers.forEach(header=>{
+                //if the object has the property of header name
+                if(header.name in row ){
+                    Object.assign(rowData, {[header.name]: row[header.name]})
+                }
+            })
+            allRows.push(rowData)
+        })
+
+        return allRows;
+    }
     return(
         <tbody>
             {
-                rows.map((row):ReactNode=>{
+               getAllRows().map((row):ReactNode=>{
                     return(
-                        <tr onClick={()=onRowClick(row, row.name as string)}>
-                            <td>{row.name as string}</td>
+                        <tr>
+                            {
+                                Object.values(row).map(value=><td>{value as string}</td>)
+                            }
                         </tr>
                     )
-                })
+               })
+               
             }
         </tbody>
     )
