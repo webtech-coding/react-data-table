@@ -58,6 +58,24 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
             age:25,
             address:"Satungal",
             nationality:"Nepali"
+        },
+        {
+            name:"shovit",
+            age:45,
+            address:"Kathmandu",
+            nationality:"Nepali"
+        },
+        {
+            name:"siya",
+            age:5,
+            address:"Finland",
+            nationality:"Nepali"
+        },
+        {
+            name:"Shova",
+            age:25,
+            address:"Satungal",
+            nationality:"Nepali"
         }
     ]
 
@@ -74,7 +92,7 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
                     rows={tableRows}
                     headers={tableHeaderDataCells}
                     stripe={stripe}
-                    onRowClick={(row:TableColumnDataCell, columnCell:string)=>{console.log(row, columnCell)}}
+                    onRowClick={(row:TableColumnDataCell)=>{console.log(row)}}
                 />
             </table>
         </div>

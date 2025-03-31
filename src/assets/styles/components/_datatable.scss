@@ -1,28 +1,118 @@
 .data-table{
     width: 100%;
-    border-radius: 5px 5px;
 
     &__table{
         width: 100%;
         border-collapse: collapse;
         text-align: left;
         box-shadow: 0 0 10px rgba($color: #767676, $alpha: .3);
+        margin-top: 10px;
+        border-radius: 10px 10px 0 0;
+        background-color: #ffffff;
     }
 
     &__header{
         width: 100%;
 
         tr{
-            background-color: #f1f1f1;
             text-align: left;
+            border-bottom: 1px solid #e2e2e2;
            
             th{
-                padding: 10px;
-                color: #515151;
-                border-right: 1px solid #808080;
-               
+                padding: 15px 10px;
+                color: #202020;
+                border-right: 1px solid #e2e2e2;
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 14px;
+
+                &:first-of-type{
+                    border-radius: 10px 0 0 0;
+                }
+
+                &:last-of-type{
+                    border-radius:  0 10px 0 0;
+                    border-right:none;
+                }
  
             }
         }
-    }   
+
+        &-content{
+            display: flex;
+            justify-content: space-between;
+
+            svg{
+                width: 14px;
+                height: 14px;
+                transform: rotate(90deg);
+                fill: #767676;
+                cursor: pointer;
+
+                &:hover{
+                    fill: #0076bf;
+
+                }
+            }
+
+            &--active{
+                svg{
+                    fill: #0076bf;
+                }
+                
+            }
+        }
+    }
+
+    &__body{
+        width: 100%;
+
+        tr{
+            text-align: left;
+            border-bottom: 1px solid #e2e2e2;
+       
+        }
+       
+        td{
+            padding: 15px 10px;
+            color: #515151;
+           // border-right: 1px solid #e2e2e2;
+        }
+
+        &--stripe{
+            tr{
+                &:nth-of-type(2n){
+                    background-color: #f4f4f4;
+                }
+            }
+        }
+    }
+
+    &__action-bar{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__search{
+        display: flex;
+        align-items: center;
+        input{
+            border: 1px solid #e2e2e2;
+            padding: 10px;
+            width: 400px;
+            padding-left: 30px;
+            outline-color: #cccccc;
+            border-radius: 0;
+        }
+
+        svg{
+            height: 24px;
+            width: 24px;
+            fill: #202020;
+            margin-right: -24px;
+            z-index: 10;
+        }
+    }
 }

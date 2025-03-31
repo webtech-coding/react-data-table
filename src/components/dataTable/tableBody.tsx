@@ -5,7 +5,7 @@ type TableColumnDataCellProps = {
     rows:TableColumnDataCell[],
     headers:TableHeaderDataCell[];
     stripe:boolean,
-    onRowClick:(row:TableColumnDataCell, columnCell:string)=>void
+    onRowClick:(row:TableColumnDataCell)=>void
 }
 
 const TableBody:FC<TableColumnDataCellProps> =({rows, headers, stripe, onRowClick}):ReactElement=>{
@@ -27,13 +27,13 @@ const TableBody:FC<TableColumnDataCellProps> =({rows, headers, stripe, onRowClic
         return allRows;
     }
     return(
-        <tbody>
+        <tbody className="data-table__body data-table__body--stripe">
             {
                getAllRows().map((row):ReactNode=>{
                     return(
                         <tr>
                             {
-                                Object.values(row).map(value=><td>{value as string}</td>)
+                                Object.values(row).map(value=><td onClick={()=>onRowClick(row)}>{value as string}</td>)
                             }
                         </tr>
                     )
