@@ -7,7 +7,6 @@
         text-align: left;
         box-shadow: 0 0 10px rgba($color: #767676, $alpha: .3);
         margin-top: 10px;
-        border-radius: 10px 10px 0 0;
         background-color: #ffffff;
     }
 
@@ -171,11 +170,16 @@
             height: 36px;
             display: flex;
             align-items: center;
-            background-color: red;
             width: 36px;
             justify-content: center;
-            background-color: #e2e2e2;
+            border: 1px solid #e2e2e2;
             cursor: pointer;
         }
     }
-}
+
+    &__error{
+        background-color: #d62828;
+        color: #ffffff;
+        padding: 20px;
+    }
+}   

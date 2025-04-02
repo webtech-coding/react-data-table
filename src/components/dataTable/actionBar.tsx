@@ -1,6 +1,6 @@
 import { ReactElement, type FC } from "react";
 import SearchIcon from "../../assets/icons/searchIcons";
-import ArrowIcon from "../../assets/icons/arrowIcon";
+import Pagination from './pagination';
 
 const ActionBar:FC =():ReactElement=>{
     return(
@@ -17,11 +17,7 @@ const ActionBar:FC =():ReactElement=>{
                         <option>50</option>
                     </select>
                 </div>
-                <div className="data-table__pagination">
-                    <div className="data-table__pagination-nav"><ArrowIcon /> <span>previous</span></div>
-                    <div className="data-table__pagination-page">1</div>
-                    <div className="data-table__pagination-nav data-table__pagination-nav--reverse"> Next <ArrowIcon /> </div>
-                </div>
+                <Pagination />
             </div>
         </div>
     )

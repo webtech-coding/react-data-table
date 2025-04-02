@@ -14,8 +14,12 @@ const TableHeader:FC<TableHeaderPropType> =({headers, onHeaderClick}):ReactEleme
                 {
                     headers.map(cell=>{
                         return(
-                            <th onClick={()=>onHeaderClick(cell)}>
-                                <div className="data-table__header-content"> <span>{cell.label}</span><span><SortIcon /></span></div>
+                            <th>
+                                <div className="data-table__header-content"> 
+                                    <span>{cell.label}</span>
+                                    {cell.sorting && <span onClick={()=>onHeaderClick(cell)}><SortIcon /></span>}
+                                    
+                                </div>
                             </th>
                         )
                     })
