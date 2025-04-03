@@ -18,7 +18,6 @@ const TableHeader:FC<TableHeaderPropType> =({headers, onHeaderClick}):ReactEleme
                                 <div className="data-table__header-content"> 
                                     <span>{cell.label}</span>
                                     {cell.sorting && <span onClick={()=>onHeaderClick(cell)}><SortIcon /></span>}
-                                    
                                 </div>
                             </th>
                         )

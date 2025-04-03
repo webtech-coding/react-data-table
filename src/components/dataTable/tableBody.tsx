@@ -1,16 +1,20 @@
-import { ReactElement, ReactNode, type FC } from "react";
+import { ReactElement, ReactNode, useCallback, type FC } from "react";
 import { TableColumnDataCell, TableHeaderDataCell } from "./types";
 
 type TableColumnDataCellProps = {
     rows:TableColumnDataCell[],
     headers:TableHeaderDataCell[];
     stripe:boolean,
-    onRowClick:(row:TableColumnDataCell)=>void
+    onRowClick:(row:TableColumnDataCell)=>void,
+    currentPage:number,
+    numberOfVisibleRows:number
 }
 
-const TableBody:FC<TableColumnDataCellProps> =({rows, headers, stripe, onRowClick}):ReactElement=>{
-    const getAllRows = ()=>{
-        const allRows:TableColumnDataCell[] = []
+const TableBody:FC<TableColumnDataCellProps> =(props):ReactElement=>{
+    const {rows, headers, stripe, onRowClick, currentPage, numberOfVisibleRows} = props;
+
+    const getAllRows = useCallback(()=>{
+        let allRows:TableColumnDataCell[] = []
 
         rows.forEach(row=>{
             const rowData= {}
@@ -23,9 +27,11 @@ const TableBody:FC<TableColumnDataCellProps> =({rows, headers, stripe, onRowClic
             })
             allRows.push(rowData)
         })
+        
+        allRows = [...allRows].slice((currentPage-1)* numberOfVisibleRows, numberOfVisibleRows*currentPage)
 
         return allRows;
-    }
+    }, [rows, headers, currentPage, numberOfVisibleRows])
     return(
         <tbody className="data-table__body data-table__body--stripe">
             {

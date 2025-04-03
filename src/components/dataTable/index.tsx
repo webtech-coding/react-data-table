@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import ActionBar from "./actionBar";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
-import { TableColumnDataCell, TableHeaderDataCell, TableProps, sortDirection, visibleRows } from "./types";
+import { TableColumnDataCell, TableHeaderDataCell, TableProps, sortDirection, VisibleRows } from "./types";
 import { defaultTableProps } from "./constant";
 
 const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
@@ -12,13 +12,15 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
         showActionBar=defaultTableProps.showActionBar,
         rows=defaultTableProps.rows,
         headers=defaultTableProps.headers,
-        stripe=defaultTableProps.stripe
+        stripe=defaultTableProps.stripe,
+        tableTheme=defaultTableProps.tableTheme
     } = props;
 
-    const [numberOfVisibleRows, setNumberOfVisibleRows] = useState<visibleRows>(10);
+    const [numberOfVisibleRows, setNumberOfVisibleRows] = useState<VisibleRows>(10);
     const [sortByColumn, setSortbyColumn] = useState<string | null>(null);
     const [sortDir, setSortDir] = useState<sortDirection>(sortDirection.ASC);
-    const [searchText, setSearchText] = useState<string | null>();
+    const [searchText, setSearchText] = useState<string | null>(null);
+    const [currentPage, setCurrentPage] = useState<number>(1);
     
 
     const tableHeaderDataCells = [
@@ -363,8 +365,6 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
             setSortbyColumn(headerCell.name)
         }else{
             const sorting = (sortDir === sortDirection.ASC) ? sortDirection.DESC : sortDirection.ASC
-            console.log("####")
-            console.log(sorting)
             setSortbyColumn(headerCell.name)
             setSortDir(sorting);
         }
@@ -400,7 +400,20 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
 
     return(
         <div className="data-table">            
-            {showActionBar && <ActionBar searchText={searchText} onTextChange={(text:string)=>setSearchText(text)}/>}            
+            {showActionBar && 
+                <ActionBar
+                    searchText={searchText}
+                    onTextChange={(text:string)=>setSearchText(text)}
+                    onVisibleRowChange={(value:VisibleRows)=>{
+                        setNumberOfVisibleRows(value)
+                        setCurrentPage(1)
+                    }}
+                    currentPage={currentPage}
+                    visibleNumberOfRows={numberOfVisibleRows}
+                    rows={sortedTableRows}
+                    paginationChange={(value:number)=>setCurrentPage(prevState=>prevState + value)}
+                />
+            }            
             <table className="data-table__table">             
                 <TableHeader 
                     headers={tableHeaderDataCells}
@@ -414,10 +427,11 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
                             headers={tableHeaderDataCells}
                             stripe={stripe}
                             onRowClick={(row:TableColumnDataCell)=>{console.log(row)}}
+                            numberOfVisibleRows={numberOfVisibleRows}
+                            currentPage = {currentPage}
                         />
                     )
                 }
-                
             </table>
         </div>
     )

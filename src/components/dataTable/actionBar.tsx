@@ -5,14 +5,23 @@ import { actionBarPropsType } from "./types";
 import SearchIcon from "../../assets/icons/searchIcons";
 import Pagination from './pagination';
 
-const ActionBar:FC<actionBarPropsType> =({searchText,onTextChange}):ReactElement=>{
+const ActionBar:FC<actionBarPropsType> =(props):ReactElement=>{
+    const {
+        searchText,
+        onTextChange,
+        onVisibleRowChange,
+        currentPage,
+        visibleNumberOfRows,
+        rows,
+        paginationChange
+        } = props
     return(
         <div className="data-table__action-bar">
             <div className="data-table__search">
                 <SearchIcon /> 
                 <input 
                     type="text" 
-                    value={searchText}
+                    value={searchText || ""}
                     placeholder="Search..."
                     onChange={(e:ChangeEvent<HTMLInputElement>)=>onTextChange(e.target.value)}
                 />
@@ -20,13 +29,18 @@ const ActionBar:FC<actionBarPropsType> =({searchText,onTextChange}):ReactElement
             <div className="data-table__pages">
                 <div className="data-table__entries">
                     <span>Enteries</span>
-                    <select>
-                        <option>10</option>
-                        <option>20</option>
-                        <option>50</option>
+                    <select onChange={(e:ChangeEvent<HTMLSelectElement>)=>onVisibleRowChange(parseInt(e.target.value))}>
+                        <option value={10}>10</option>
+                        <option value={20}>20</option>
+                        <option value={50}>50</option>
                     </select>
                 </div>
-                <Pagination />
+                <Pagination 
+                    rows={rows}
+                    currentPage={currentPage}
+                    visibleNumberOfRows={visibleNumberOfRows}
+                    paginationChange={paginationChange}
+                />
             </div>
         </div>
     )

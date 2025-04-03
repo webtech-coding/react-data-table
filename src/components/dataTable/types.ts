@@ -21,9 +21,21 @@ export enum sortDirection{
     DESC = 'desc'
 }
 
-export type visibleRows = 10 | 20 | 50
+export type VisibleRows = 10 | 20 | 50
 
 export type actionBarPropsType = {
     onTextChange:(text:string)=>void,
-    searchText:string | string
+    searchText:string | null,
+    onVisibleRowChange:(numOfRows:VisibleRows)=>void,
+    rows:TableColumnDataCell[]
+    currentPage:number,
+    visibleNumberOfRows:VisibleRows,
+    paginationChange:(value:number)=>void
+}
+
+export type PaginationPropsTypes={
+    currentPage:number,
+    visibleNumberOfRows:number,
+    rows:TableColumnDataCell[],
+    paginationChange:(value:number)=>void
 }

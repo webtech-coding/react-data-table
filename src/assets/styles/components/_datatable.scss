@@ -164,6 +164,16 @@
                     transform: rotate(180deg);
                 }
             }
+
+            &:hover{
+                background-color: #e2e2e2;
+                
+            }
+
+            &--disabled{
+                cursor: default;
+                opacity: .5;
+            }
         }
 
         &-page{
@@ -174,6 +184,12 @@
             justify-content: center;
             border: 1px solid #e2e2e2;
             cursor: pointer;
+        }
+
+        &-index{
+            width: 100px;
+            font-weight: 600;
+            background-color: #ececec;
         }
     }
 
