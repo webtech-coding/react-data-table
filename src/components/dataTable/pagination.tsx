@@ -6,7 +6,6 @@ import ArrowIcon from "../../assets/icons/arrowIcon";
 
 const Pagination:FC<PaginationPropsTypes> =({currentPage, visibleNumberOfRows, rows, paginationChange}):ReactElement=>{
     
-
     const getTotalPages =():number=>{
         const rowsPerPage = rows.length / visibleNumberOfRows;
        
@@ -17,7 +16,7 @@ const Pagination:FC<PaginationPropsTypes> =({currentPage, visibleNumberOfRows, r
         return totalPagesOfRows;
     }
 
-    const handlePaginationChnage=(dir:string)=>{
+    const handlePaginationChange=(dir:string)=>{
         const totalPages = getTotalPages();
         if(dir==='prev'){
             if(currentPage===1)return
@@ -30,13 +29,13 @@ const Pagination:FC<PaginationPropsTypes> =({currentPage, visibleNumberOfRows, r
 
     return(
         <div className="data-table__pagination">
-            <div className={`data-table__pagination-nav ${currentPage===1 ? 'data-table__pagination-nav--disabled':''}`} onClick={()=>handlePaginationChnage('prev')}>
+            <div className={`data-table__pagination-nav ${currentPage===1 ? 'data-table__pagination-nav--disabled':''}`} onClick={()=>handlePaginationChange('prev')}>
                 <ArrowIcon /> <span>Previous</span>
             </div>
                 <div className="data-table__pagination-page data-table__pagination-index">
-                    {currentPage} OF {getTotalPages()}
+                    <strong>{currentPage}</strong> of <strong>{getTotalPages()}</strong> pages
                 </div>
-            <div className={`data-table__pagination-nav data-table__pagination-nav--reverse ${currentPage===getTotalPages() ? 'data-table__pagination-nav--disabled':''}`} onClick={()=>handlePaginationChnage('next')}> 
+            <div className={`data-table__pagination-nav data-table__pagination-nav--reverse ${currentPage===getTotalPages() ? 'data-table__pagination-nav--disabled':''}`} onClick={()=>handlePaginationChange('next')}> 
                 Next <ArrowIcon /> 
             </div>
     </div>
