@@ -1,4 +1,4 @@
-import { FC, ReactElement, ReactNode, useMemo, useState } from "react";
+import { FC, ReactElement, ReactNode, useCallback, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 
 import ActionBar from "./actionBar";
@@ -303,31 +303,56 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
      * sort table by the selected header column
     */
     const sortedTableRows = useMemo(()=>{
-        if(!sortByColumn)return tableRows
+        
+        if(!sortByColumn && !searchText)return tableRows
+        let sortedRows:TableColumnDataCell[] = [...tableRows];
 
-       const sortedRows : TableColumnDataCell[] = [...tableRows].sort((a, b)=>{
-
-            const sortProperty: keyof TableColumnDataCell = sortByColumn;
-
-            const aValue = a[sortProperty];
-            const bValue = b[sortProperty];
-
-            if(typeof aValue ==='string' && typeof bValue==='string'){
-
-                return sortDir === sortDirection.ASC ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue)
-
-            }else if(typeof aValue ==='number' && typeof bValue ==='number'){
-                return sortDir === sortDirection.ASC ? aValue - bValue : bValue - aValue;
-            }
-
-            return 0
-        })
-        return sortedRows
-    },[rows, sortByColumn, sortDir, headers])
+        //if the columns have to be sorted
+        if(sortByColumn){
+            sortedRows = [...tableRows].sort((a, b)=>{
+                const sortProperty: keyof TableColumnDataCell = sortByColumn;
     
+                const aValue = a[sortProperty];
+                const bValue = b[sortProperty];
+    
+                if(typeof aValue ==='string' && typeof bValue==='string'){
+                    return sortDir === sortDirection.ASC ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue)
+    
+                }else if(typeof aValue ==='number' && typeof bValue ==='number'){
+                    return sortDir === sortDirection.ASC ? aValue - bValue : bValue - aValue;
+                }
+    
+                return 0
+            })
+        }
+
+        // if the rows need to be filtered with search text
+        if(searchText){
+            sortedRows = sortedRows.filter((row):boolean=>{
+                let includeRow:boolean = false;
+
+                Object.entries(row).forEach(([key, value])=>{
+                    if(includeRow)return 
+                    if(!value)return
+
+                    const searchTextString = searchText.toString().toLowerCase();
+                    const valueString = value.toString().toLowerCase();
+
+                    if(valueString.includes(searchTextString) && tableHeaderDataCells.find(cell=>cell.name === key)){
+                        includeRow = true
+                    }
+                })
+
+                return includeRow
+            })
+        }
+
+        return sortedRows
+    },[rows, sortByColumn, sortDir, headers, searchText])
+
 
     /**
-     * when user clicks sort icon in the header
+     * when user clicks sort icon in the table header
      * @param headerCell 
      * @returns 
      */
@@ -335,8 +360,11 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
         if(!headerCell.sorting)return
         if(headerCell.name !== sortByColumn){
             setSortDir(sortDirection.ASC)
-        }{
-            const sorting = sortDir === sortDirection.ASC ? sortDirection.DESC : sortDirection.ASC
+            setSortbyColumn(headerCell.name)
+        }else{
+            const sorting = (sortDir === sortDirection.ASC) ? sortDirection.DESC : sortDirection.ASC
+            console.log("####")
+            console.log(sorting)
             setSortbyColumn(headerCell.name)
             setSortDir(sorting);
         }
@@ -372,7 +400,7 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
 
     return(
         <div className="data-table">            
-            {showActionBar && <ActionBar/>}            
+            {showActionBar && <ActionBar searchText={searchText} onTextChange={(text:string)=>setSearchText(text)}/>}            
             <table className="data-table__table">             
                 <TableHeader 
                     headers={tableHeaderDataCells}

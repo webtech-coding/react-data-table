@@ -22,3 +22,8 @@ export enum sortDirection{
 }
 
 export type visibleRows = 10 | 20 | 50
+
+export type actionBarPropsType = {
+    onTextChange:(text:string)=>void,
+    searchText:string | string
+}
