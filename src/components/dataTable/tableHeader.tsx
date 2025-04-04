@@ -55,7 +55,7 @@ const TableHeader:FC<TableHeaderPropType> =({headers, onHeaderClick}):ReactEleme
                         return(
                             <th key={`cell-${index}`}>
                                 <CellContainer> 
-                                    <span>{cell.label}</span>
+                                    <span>{cell.label || cell.name}</span>
                                     {cell.sorting && <span onClick={()=>onHeaderClick(cell)}><SortIcon /></span>}
                                 </CellContainer>
                             </th>

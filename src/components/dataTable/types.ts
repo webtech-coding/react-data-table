@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 
 export type TableHeaderDataCell={
-    label:string,
+    label?:string,
     name:string,
     sorting?:boolean,
     hideInSm?:boolean,

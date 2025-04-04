@@ -59,7 +59,6 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
 
         },
         {
-            label:"Rating",
             name:"rating",
             sorting:true
 
@@ -461,7 +460,8 @@ ReactDataTable.prototype = {
     showActionBar:PropTypes.bool,
     rows:PropTypes.array.isRequired,
     headers:PropTypes.array.isRequired,
-    strpe:PropTypes.bool
+    strpe:PropTypes.bool,
+    theme:PropTypes.object
 }
 
 export default ReactDataTable;
