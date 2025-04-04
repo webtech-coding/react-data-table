@@ -7,8 +7,6 @@ It supports dynamic columns and rows with clean, minimal styling — ideal for r
 
 This lightweight and minimalistic data table includes essential features out of the box.
 
----
-
 ## Key build-in features
 
 - ✅ Sorting by column
@@ -23,10 +21,10 @@ This lightweight and minimalistic data table includes essential features out of 
 npm install react-data-table
 # or
 yarn add react-data-table
-
-
 ```
-import { DataTable } from "react-data-table";
+## 🚀 Usage
+
+```import { DataTable } from "react-data-table";
 
 type User = {
   id: number;
@@ -48,7 +46,6 @@ const columns = [
 function App() {
   return <DataTable columns={columns} data={users} />;
 }
-
 ```
 
 
