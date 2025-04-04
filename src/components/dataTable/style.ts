@@ -45,5 +45,37 @@ export const defaultColorSchema: DefaultTheme={
     }
 }
 
+/**
+ * When custom themeing is provided, we merge with the defaul one.
+ * @param theme 
+ * @returns 
+ */
+export const createTableStyle=(theme:colorSchemaType | null):DefaultTheme=>{
+    if(!theme)return defaultColorSchema
 
-export const createTableStyle=(theme:colorSchemaType):DefaultTheme=>(defaultColorSchema);
+    const customColorSchema = {}; 
+
+    const colorKeys = Object.keys(theme);
+    if(!colorKeys.length)return defaultColorSchema;
+    
+        Object.entries(defaultColorSchema).forEach(([schemaKey, schemaObject])=>{
+        
+           if(!colorKeys.includes(schemaKey)){
+                Object.assign(customColorSchema, {[schemaKey]:schemaObject})
+            }else{
+                const customTheme = theme[schemaKey];
+               
+                const newProperty={}
+                Object.entries(schemaObject).forEach(([key])=>{
+                    if(customTheme[key]){
+                        Object.assign(newProperty, {[key]:customTheme[key]})
+                     
+                        Object.assign(customColorSchema, {[schemaKey]:{} })
+                    }
+                })
+                Object.assign(customColorSchema, {[schemaKey]: newProperty})
+               
+            }
+        })
+        return customColorSchema
+}

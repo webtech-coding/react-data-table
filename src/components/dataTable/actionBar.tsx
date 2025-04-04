@@ -62,7 +62,6 @@ const RightSectionBar = styled.div`
     }
 ` 
 
-
 const ActionBar:FC<actionBarPropsType> =(props):ReactElement=>{
     const {
         searchText,
@@ -88,7 +87,10 @@ const ActionBar:FC<actionBarPropsType> =(props):ReactElement=>{
             <RightSectionBar>
                 <div>
                     <span>Enteries</span>
-                    <select onChange={(e:ChangeEvent<HTMLSelectElement>)=>onVisibleRowChange(parseInt(e.target.value) as VisibleRows )}>
+                    <select 
+                        onChange={(e:ChangeEvent<HTMLSelectElement>)=>onVisibleRowChange(parseInt(e.target.value) as VisibleRows )}
+                        value={visibleNumberOfRows}
+                    >
                         <option value={10}>10</option>
                         <option value={20}>20</option>
                         <option value={50}>50</option>

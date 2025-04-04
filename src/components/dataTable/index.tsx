@@ -20,14 +20,14 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
         rows=defaultTableProps.rows,
         headers=defaultTableProps.headers,
         stripe=defaultTableProps.stripe,
-        theme=defaultTableProps.tableTheme
+        theme
     } = props;
 
-    const [numberOfVisibleRows, setNumberOfVisibleRows] = useState<VisibleRows>(10);
+    const [numberOfVisibleRows, setNumberOfVisibleRows] = useState<VisibleRows>(20);
     const [sortByColumn, setSortbyColumn] = useState<string | null>(null);
     const [sortDir, setSortDir] = useState<sortDirection>(sortDirection.ASC);
     const [searchText, setSearchText] = useState<string | null>(null);
-    const [currentPage, setCurrentPage] = useState<number>(1);    
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
     const tableHeaderDataCells = [
         {

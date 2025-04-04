@@ -1,5 +1,4 @@
 import { CSSProperties } from "react";
-import { colorSchema } from "./theme";
 
 export type TableHeaderDataCell={
     label:string,
@@ -17,7 +16,7 @@ export type TableProps={
     headers:TableHeaderDataCell[],
     rows:TableColumnDataCell[],
     onRowClick?:(row:TableColumnDataCell, name:string)=>void
-    theme:colorSchemaType
+    theme:colorSchemaType | null
 }
 
 export enum sortDirection{
