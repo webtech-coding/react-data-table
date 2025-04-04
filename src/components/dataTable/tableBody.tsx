@@ -1,5 +1,6 @@
 import { ReactElement, ReactNode, useCallback, type FC } from "react";
 import { TableColumnDataCell, TableHeaderDataCell } from "./types";
+import styled from "styled-components";
 
 type TableColumnDataCellProps = {
     rows:TableColumnDataCell[],
@@ -9,6 +10,27 @@ type TableColumnDataCellProps = {
     currentPage:number,
     numberOfVisibleRows:number
 }
+
+
+const TableBodyWrapper=styled.tbody<{stripe?:boolean}>`
+     width: 100%;
+
+    tr{
+        text-align: left;
+        border-bottom: 1px solid ${({theme})=>theme.border?.default};
+        cursor: pointer;
+
+        &:nth-of-type(2n){
+            background-color:${({stripe, theme})=>stripe ? theme.background?.striped:theme.background?.default};
+        }
+    }
+    
+    td{
+        padding: 18px 10px;
+        color: ${({theme})=>theme.text?.default};
+    }
+
+`
 
 const TableBody:FC<TableColumnDataCellProps> =(props):ReactElement=>{
     const {rows, headers, stripe, onRowClick, currentPage, numberOfVisibleRows} = props;
@@ -32,12 +54,13 @@ const TableBody:FC<TableColumnDataCellProps> =(props):ReactElement=>{
 
         return allRows;
     }, [rows, headers, currentPage, numberOfVisibleRows])
+
     return(
-        <tbody className="data-table__body data-table__body--stripe">
+        <TableBodyWrapper stripe={stripe}>
             {
-               getAllRows().map((row):ReactNode=>{
+               getAllRows().map((row, index):ReactNode=>{
                     return(
-                        <tr>
+                        <tr key={`row-${index}`}>
                             {
                                 Object.values(row).map(value=><td onClick={()=>onRowClick(row)}>{value as string}</td>)
                             }
@@ -46,7 +69,7 @@ const TableBody:FC<TableColumnDataCellProps> =(props):ReactElement=>{
                })
                
             }
-        </tbody>
+        </TableBodyWrapper>
     )
 }
 

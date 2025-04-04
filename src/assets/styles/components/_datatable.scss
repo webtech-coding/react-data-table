@@ -8,6 +8,7 @@
         box-shadow: 0 0 10px var(--c-shade);
         margin-top: 15px;
         background-color: #ffffff;
+        overflow-x: auto;
     }
 
     &__header{
@@ -188,7 +189,7 @@
 
         &-index{
             width: 120px;
-           // background-color: #ececec;
+           
         }
     }
 

@@ -14,6 +14,16 @@ const TableWrapper=styled.div({
     width:'100%',
 })
 
+const HtmlTable=styled.table({
+    'width': '100%',
+    'borderCollapse': 'collapse',
+    'textAlign': 'left',
+    'boxShadow': `0 0 10px ${({theme})=>theme.shade?.default}`,
+    'marginTop': '15px',
+    'backgroundColor': '#ffffff',
+    'overflowX': 'auto'
+})
+
 const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
     const { 
         showActionBar=defaultTableProps.showActionBar,
@@ -423,7 +433,7 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
                         paginationChange={(value:number)=>setCurrentPage(prevState=>prevState + value)}
                     />
                 }            
-                <table className="data-table__table">
+                <HtmlTable>
                     <TableHeader 
                         headers={tableHeaderDataCells}
                         onHeaderClick={(headerCell:TableHeaderDataCell)=>{handleColumnSorting(headerCell)}}
@@ -441,7 +451,7 @@ const ReactDataTable:FC<TableProps> = (props):ReactElement=>{
                             />
                         )
                     }
-                </table>
+                </HtmlTable>
             </TableWrapper>
         </ThemeProvider>
     )

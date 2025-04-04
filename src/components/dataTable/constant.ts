@@ -4,6 +4,6 @@ export const defaultTableProps = {
     showActionBar:true,
     rows:[],
     headers:[],
-    stripe:false,
+    stripe:true,
     tableTheme:defaultColorSchema
 }

@@ -45,8 +45,8 @@ const PaginationNav =styled.div<{reverse?:boolean, disabled?:boolean}>`
         
     }
     
-    opacity:${({disabled})=>disabled ? .3:1}
-    cursor:${({disabled})=>disabled ? 'default':'pointer'}
+    opacity:${({disabled})=>disabled ? .3:1};
+    cursor:${({disabled})=>disabled ? 'default':'pointer'};
 `
 
 const Pagination:FC<PaginationPropsTypes> =({currentPage, visibleNumberOfRows, rows, paginationChange}):ReactElement=>{

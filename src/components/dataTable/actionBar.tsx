@@ -12,6 +12,12 @@ const ActionBarWrapper=styled.div`
         justify-content: space-between;
         align-items: center;
         background-color:${({theme})=>theme.background?.default};
+
+
+        @media only screen and (max-width: 820px){
+            flex-direction:column;
+            align-items:flex-start;
+        }
     `
 
 const SearchBar=styled.div`
@@ -20,7 +26,7 @@ const SearchBar=styled.div`
     input{
         border: 1px solid ${({theme})=>theme.border?.default};
         padding: 10px;
-        width: 400px;
+        width: 415px;
         padding-left: 30px;
         outline-color: none;
 
@@ -37,6 +43,12 @@ const SearchBar=styled.div`
         fill: ${({theme})=>theme.text?.dark};
         margin-right: -24px;
         z-index: 10;
+    }
+
+      @media only screen and (max-width: 820px){
+          
+        margin-bottom:20px;
+        
     }
 ` 
 
