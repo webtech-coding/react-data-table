@@ -25,7 +25,7 @@ npm install react-data-table
 yarn add react-data-table
 
 
-````
+```
 import { DataTable } from "react-data-table";
 
 type User = {
