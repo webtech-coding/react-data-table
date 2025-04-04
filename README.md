@@ -24,7 +24,8 @@ yarn add react-data-table
 ```
 ## 🚀 Usage
 
-```import { DataTable } from "react-data-table";
+```
+import { DataTable } from "react-data-table";
 
 type User = {
   id: number;
@@ -46,6 +47,7 @@ const columns = [
 function App() {
   return <DataTable columns={columns} data={users} />;
 }
+
 ```
 
 
