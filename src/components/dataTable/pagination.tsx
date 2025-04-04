@@ -1,8 +1,53 @@
 import { FC, ReactElement, memo } from 'react';
+import styled from 'styled-components';
 
 import { PaginationPropsTypes } from './types';
 
 import ArrowIcon from "../../assets/icons/arrowIcon";
+
+const PaginationWrapper=styled.div`
+    display: flex;
+    border: 1px solid ${({theme})=>theme.border?.default};
+    height: 36px;
+    align-items: center;
+`
+
+const PaginationIndex = styled.div`
+    height: 36px;
+    display: flex;
+    align-items: center;
+    width: 36px;
+    justify-content: center;
+    border: 1px solid ${({theme})=>theme.border?.default};
+    width: 120px;
+
+    strong{
+        padding: 0 5px;
+    }
+`
+
+const PaginationNav =styled.div<{reverse?:boolean, disabled?:boolean}>`
+    padding: 0 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 36px;
+
+    svg{
+        fill: ${({theme})=>theme.text?.default};
+        height: 20px;
+        width: 20px;
+        transform: ${({reverse})=>reverse ? 'rotate(180deg)':''}
+    }
+
+    &:hover{
+        background-color: ${({theme})=>theme.background?.striped};
+        
+    }
+    
+    opacity:${({disabled})=>disabled ? .3:1}
+    cursor:${({disabled})=>disabled ? 'default':'pointer'}
+`
 
 const Pagination:FC<PaginationPropsTypes> =({currentPage, visibleNumberOfRows, rows, paginationChange}):ReactElement=>{
     
@@ -28,17 +73,24 @@ const Pagination:FC<PaginationPropsTypes> =({currentPage, visibleNumberOfRows, r
     }
 
     return(
-        <div className="data-table__pagination">
-            <div className={`data-table__pagination-nav ${currentPage===1 ? 'data-table__pagination-nav--disabled':''}`} onClick={()=>handlePaginationChange('prev')}>
+        <PaginationWrapper>
+            <PaginationNav 
+                onClick={()=>handlePaginationChange('prev')}
+                disabled={currentPage===1}
+            >
                 <ArrowIcon /> <span>Previous</span>
-            </div>
-                <div className="data-table__pagination-page data-table__pagination-index">
-                    <strong>{currentPage}</strong> of <strong>{getTotalPages()}</strong> pages
-                </div>
-            <div className={`data-table__pagination-nav data-table__pagination-nav--reverse ${currentPage===getTotalPages() ? 'data-table__pagination-nav--disabled':''}`} onClick={()=>handlePaginationChange('next')}> 
+            </PaginationNav>            
+            <PaginationIndex>
+                <strong>{currentPage}</strong> of <strong>{getTotalPages()}</strong> pages
+            </PaginationIndex>
+            <PaginationNav
+                disabled={currentPage===getTotalPages()}
+                onClick={()=>handlePaginationChange('next')}
+                reverse
+            >
                 Next <ArrowIcon /> 
-            </div>
-    </div>
+            </PaginationNav>
+        </PaginationWrapper>
     )
 }
 

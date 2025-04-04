@@ -5,8 +5,7 @@
         width: 100%;
         border-collapse: collapse;
         text-align: left;
-        //box-shadow: 0 0 10px rgba($color: #767676, $alpha: .3);
-        box-shadow: 0 0 10px #dee2e6;
+        box-shadow: 0 0 10px var(--c-shade);
         margin-top: 15px;
         background-color: #ffffff;
     }
@@ -16,26 +15,17 @@
 
         tr{
             text-align: left;
-            border-bottom: 1px solid #adb5bd;
+            border-bottom: 1px solid var(--c-border);
+            border-top: 1px solid var(--c-border);
             background-color: #ffffff;
            
             th{
                 padding: 15px 10px;
-                color: #202020;
-                border-right: 1px solid #adb5bd;
+                color: var(--c-font-dark);
+                border-right: 1px solid var(--c-border);
                 font-weight: 600;
                 text-transform: uppercase;
                 font-size: 14px;
-
-                &:first-of-type{
-                  //  border-radius: 10px 0 0 0;
-                }
-
-                &:last-of-type{
-                   // border-radius:  0 10px 0 0;
-                  //  border-right:none;
-                }
- 
             }
         }
 
@@ -47,7 +37,7 @@
                 width: 14px;
                 height: 14px;
                 transform: rotate(90deg);
-                fill: #767676;
+                fill: var(--c-font);
                 cursor: pointer;
 
                 &:hover{
@@ -70,22 +60,20 @@
 
         tr{
             text-align: left;
-            border-bottom: 1px solid #adb5bd;
+            border-bottom: 1px solid var(--c-border);
+            cursor: pointer;
        
         }
        
         td{
             padding: 18px 10px;
-            color: #515151;
-           // border-right: 1px solid #e2e2e2;
+            color: var(--c-font);
         }
 
         &--stripe{
             tr{
                 &:nth-of-type(2n){
-                    //background-color: #f4f4f4;
-                    //background-color: #dee2e6;
-                    background-color: #e9ecef;
+                    background-color: var(--c-stripe);
                 }
             }
         }
@@ -102,15 +90,15 @@
         display: flex;
         align-items: center;
         input{
-            border: 1px solid #adb5bd;
+            border: 1px solid var(--c-border);
             padding: 10px;
             width: 400px;
             padding-left: 30px;
             outline-color: none;
-            //border-radius: 0;
+
             &:focus{
-                border: #adb5bd;
-                outline-color: #adb5bd;
+                border: var(--c-border);
+                outline-color: var(--c-border);
                 outline-style:inset;
             }
         }
@@ -118,7 +106,7 @@
         svg{
             height: 24px;
             width: 24px;
-            fill: #202020;
+            fill: var(--c-font-dark);
             margin-right: -24px;
             z-index: 10;
         }
@@ -127,16 +115,16 @@
     &__entries{
         display: flex;
         align-items: center;
-        color: #515151;
+        color: var(--c-font);
        
 
         select{
             height: 36px;
             width: 60px;
-            border: 1px solid #e2e2e2;
+            border: 1px solid var(--c-border);
             outline-color: #cccccc;
             margin: 0 10px;
-            color: #515151;
+            color: var(--c-font);
             text-align: center;
         }
     }
@@ -149,7 +137,7 @@
 
     &__pagination{
         display: flex;
-        border: 1px solid #adb5bd;
+        border: 1px solid var(--c-border);
         height: 36px;
         align-items: center;
 
@@ -162,7 +150,7 @@
             height: 36px;
 
             svg{
-                fill: #767676;;
+                fill: var(--c-font);
                 height: 20px;
                 width: 20px;
             }
@@ -174,7 +162,7 @@
             }
 
             &:hover{
-                background-color: #e2e2e2;
+                background-color: var(--c-stripe);
                 
             }
 
@@ -190,7 +178,7 @@
             align-items: center;
             width: 36px;
             justify-content: center;
-            border: 1px solid #adb5bd;
+            border: 1px solid var(--c-border);
             cursor: pointer;
 
             strong{

@@ -1,3 +1,6 @@
+import { CSSProperties } from "react";
+import { colorSchema } from "./theme";
+
 export type TableHeaderDataCell={
     label:string,
     name:string,
@@ -14,6 +17,7 @@ export type TableProps={
     headers:TableHeaderDataCell[],
     rows:TableColumnDataCell[],
     onRowClick?:(row:TableColumnDataCell, name:string)=>void
+    theme:colorSchemaType
 }
 
 export enum sortDirection{
@@ -38,4 +42,37 @@ export type PaginationPropsTypes={
     visibleNumberOfRows:number,
     rows:TableColumnDataCell[],
     paginationChange:(value:number)=>void
+}
+
+
+export interface colorSchemaType{
+    text?:{
+        dark?:string,
+        default?:string
+    },
+    background?:{
+        default?:string,
+        striped?:string,
+        warn?:string,
+        header?:string,
+        body?:string
+    },
+    shade?:{
+        default?:string
+    },
+    border?:{
+        default:string
+    }
+}
+
+export interface TableStylesType{
+    tableWrapper?:CSSProperties,
+    table?:CSSProperties,
+    tableHeader?:CSSProperties,
+    tableBody?:CSSProperties,
+    actionBar?:CSSProperties,
+    searcbar?:CSSProperties,
+    entriesBox?:CSSProperties,
+    pagination?:CSSProperties
+    warn?:CSSProperties
 }
